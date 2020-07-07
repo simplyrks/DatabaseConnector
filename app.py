@@ -8,12 +8,12 @@ import pymongo
 import json
 connection = mysql.connector.connect(host='localhost',
                                      database='employee',
-                                    user='root',
+                                     user='root',
                                      password='password')
 
 # Connection TO MongoDB
 client = pymongo.MongoClient(
-   "MONGODB Conection String with collection name Employee having attributes sam eas MYSQL table")
+   "MONGODB Conection String with collection name Employee having attributes same as MYSQL table")
 db = client.employee
 cursor = connection.cursor();
 
