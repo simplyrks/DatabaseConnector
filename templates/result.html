@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Result</title>
+</head>
+<body>
+ {% for row in rows %}
+    <tr>
+        <td>{{ row.Id }}</a></td>
+        <td>{{ row.Name }}</td>
+        <td>{{ row.Department }}</td>
+        <td>{{ row.salary }}</td>
+        <td>{{ row.Designation }}</td>
+    </tr>
+    {% endfor %}
+</body>
+</html>

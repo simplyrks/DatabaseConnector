@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<style type="text/css">
+
+	.top{
+		display: flex;
+
+	}
+	.left{
+		flex: 2;
+	}
+	.right{
+		flex:1;
+		display: flex;
+		align-items: flex-end;
+	}
+.redline{
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid red;
+}
+.tableform{
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #4CAF50;
+}
+
+.button1:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+.button2 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid blue;
+}
+
+.button2:hover {
+  background-color: blue;
+  color: white;
+}
+.button3 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid grey;
+}
+
+.button3:hover {
+  background-color: pink;
+  color: white;
+}
+.button4 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid pink;
+}
+
+.button4:hover {
+  background-color: pink;
+  color: white;
+}
+/*#update_button{
+	display: none;
+}*/
+</style>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div class = "top" id="upper-section">
+		<div class ="left">
+			<form action="{{ url_for('query') }}" method="post">
+    <h2><a href="{{ url_for('query')}}">Query:</a></h2> <input type="text" class="redline" name="query" value="{{ default }}">
+    <input class="button button1" type="submit" value="Run Query">
+	    
+</form>
+</div>
+<div class="right">
+<a href="{{ url_for('history') }}"><button class="button button2">History</button></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<a href="{{ url_for('insert') }}"><button class="button button4">Insert Into Employee</button></a>
+</div>
+</div>
+<div class="container" id="welcomeDiv">
+	<h3>{{ error }}</h3>
+<form action="{{ url_for('update') }}" method="post">
+ <table class="table table-dark active table-condensed">
+ 	<thead>
+      <tr>
+        {% for des in names %}
+        <th>{{ des }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    {% set count = [0] %}
+    {% for row in rows %}
+    <tbody>
+      
+    <tr>
+    	{% for data in row %}
+        <td><input type="text" value="{{ data }}" name="update{{ count }}" class="tableform"></td>
+        {% if count.append(count.pop() + 1) %}{% endif %}
+        {% endfor %}
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% if showbutton %}  
+<input class="button button3" type="submit" value="Update Table" >
+{% endif %}
+</form>
+
+{% if insertbutton %}
+<p> <h2>Please use this form to Insert into employee table</h2></p>
+<form action="{{ url_for('insert')}}" method="post">
+ID&nbsp&nbsp<input class = "text" type = "text" name = "Id">
+Name&nbsp&nbsp<input class = "text" type = "text" name = "Name">
+Designation&nbsp&nbsp<input class = "text" type = "text" name = "Designation">
+Salary&nbsp&nbsp<input class = "text" type = "text" name = "Salary">
+Department&nbsp&nbsp<input class = "text" type = "text" name = "Department">
+
+<input class = "button button3" type = "submit", value = "Insert">
+</form>
+{% endif %}
+    
+</div>
+<div class="container" id="welcomeDiv">
+ <table class="table table-striped active table-hover table-condensed">
+  <h2>{{ DisHistory}}</h2>
+  <thead>
+      <tr>
+        {% for des in name %}
+        <th>{{ des }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    {% for row in rowshis %}
+    <tbody>
+    <tr>
+      {% for data in row %}
+        <td>{{ data }}</td>
+        {% endfor %}
+        <td>
+                    <a href="/history/{{row[0]}}">Run</a></td>
+                    <td>
+                    <a href="/history/edit/{{row[0]}}">Edit</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+    
+</div>
+</body>
+</html>
