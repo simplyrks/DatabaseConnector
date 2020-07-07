@@ -1,0 +1,6 @@
+create table employee(
+Id integer(20) primary key,
+Name varchar(20),
+Department varchar(10),
+Salary Integer(10),
+Designation varchar(10));
