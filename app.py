@@ -9,12 +9,11 @@ import json
 connection = mysql.connector.connect(host='localhost',
                                      database='employee',
                                     user='simplyrks',
-                                     password='password',
-                                     auth_plugin='mysql_native_password')
+                                     password='password')
 
 # Connection TO MongoDB
 client = pymongo.MongoClient(
-   "mongodb+srv://simplyrks:9199987105ravi@simplyrks-kg2yc.gcp.mongodb.net/test?authSource=admin&replicaSet=simplyrks-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true")
+   "Link to your mongodb collection named Employee")
 db = client.employee
 cursor = connection.cursor();
 
